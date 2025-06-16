@@ -9,6 +9,7 @@ function readAccountsFromExcel() {
 
     const data = xlsx.utils.sheet_to_json(worksheet);
     return data; // should have Email and Password keys
+    
 }
 
 module.exports = readAccountsFromExcel;
