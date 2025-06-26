@@ -1,13 +1,11 @@
 const { test, expect } = require('@playwright/test');
-test.use({ headless: false }); // 👈 Forces browser to show
 
 test('Create Account with all fields on Opinion Edge', async ({ page }) => {
     await page.goto('https://devuser.opinion-edge.com/#/create-account', {
         waitUntil: 'networkidle',
     });
 
-    // Fill text inputs
-    await page.fill('input[placeholder="Email Id"]', `reliablenagpur15@gmail.com`);
+    await page.fill('input[placeholder="Email Id"]', 'reliablenagpur15@gmail.com');
     await page.fill('input[placeholder="First Name"]', 'Hitesh');
     await page.fill('input[placeholder="Last Name"]', 'Chauhan');
     await page.fill('input[placeholder="Password"]', 'Test@123');
@@ -25,7 +23,6 @@ test('Create Account with all fields on Opinion Edge', async ({ page }) => {
     try {
         await page.waitForSelector(popupSelector, { timeout: 5000 });
 
-        // Try different inner selectors
         const possibleSelectors = [
             '.swal2-html-container',
             '.swal2-title',
@@ -43,7 +40,7 @@ test('Create Account with all fields on Opinion Edge', async ({ page }) => {
                 break;
             }
         }
-    } catch (error) {
+    } catch {
         console.log('⚠ No validation popup appeared.');
     }
 
